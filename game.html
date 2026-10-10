@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 30px 15px;
+      font-family: Arial, sans-serif; color: #2b2100;
+      background: linear-gradient(135deg, #fff176, #ffca28);
+    }
+    .game {
+      max-width: 450px; margin: 40px auto; padding: 30px;
+      text-align: center; background: #fff;
+      border: 2px solid #2b2100; border-radius: 14px;
+      box-shadow: 6px 6px 0 #2b2100;
+    }
+    h1 { margin-top: 0; }
+    input {
+      width: 120px; padding: 12px; font-size: 1.2rem;
+      text-align: center; border: 2px solid #f9a825; border-radius: 10px;
+    }
+    button {
+      padding: 12px 20px; margin: 5px; font-size: 1rem; font-weight: bold;
+      background: #f9a825; color: #2b2100; cursor: pointer;
+      border: 2px solid #2b2100; border-radius: 8px;
+    }
+    button:hover { background: #2b2100; color: #fff3c4; }
+    #message { font-size: 1.2rem; font-weight: bold; min-height: 2rem; margin: 20px 0 10px; }
+    #tries { font-size: 0.95rem; }
+    .back { display: block; margin-top: 20px; color: #b26a00; font-weight: bold; text-decoration: none; }
+    .win { animation: pop 0.5s ease; }
+    @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <h1>🎯 Guess the Number</h1>
+    <p>I'm thinking of a number between <strong>1 and 100</strong>. Can you guess it?</p>
+
+    <input id="guess" type="number" min="1" max="100" placeholder="?">
+    <button onclick="checkGuess()">Guess</button>
+
+    <div id="message"></div>
+    <div id="tries"></div>
+
+    <button onclick="newGame()">🔄 New Game</button>
+    <a class="back" href="index.html">← Back to my portfolio</a>
+  </div>
+
+  <script>
+    let secret, tries;
+    const input = document.getElementById("guess");
+    const message = document.getElementById("message");
+    const triesText = document.getElementById("tries");
+
+    function newGame() {
+      secret = Math.floor(Math.random() * 100) + 1;
+      tries = 0;
+      input.value = "";
+      input.disabled = false;
+      message.textContent = "Good luck! 🍀";
+      message.classList.remove("win");
+      triesText.textContent = "Tries: 0";
+      input.focus();
+    }
+
+    function checkGuess() {
+      const num = Number(input.value);
+      if (!input.value || num < 1 || num > 100) {
+        message.textContent = "Please enter a number from 1 to 100.";
+        return;
+      }
+      tries++;
+      triesText.textContent = "Tries: " + tries;
+
+      if (num === secret) {
+        message.textContent = "🎉 Correct! You got it in " + tries + " tries!";
+        message.classList.add("win");
+        input.disabled = true;
+      } else if (num < secret) {
+        message.textContent = "📈 Too low. Try a higher number.";
+      } else {
+        message.textContent = "📉 Too high. Try a lower number.";
+      }
+      input.value = "";
+      input.focus();
+    }
+
+    input.addEventListener("keydown", e => { if (e.key === "Enter") checkGuess(); });
+    newGame();
+  </script>
+</body>
+</html>
