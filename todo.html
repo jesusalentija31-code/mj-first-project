@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My To-Do List</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 30px 15px;
+      font-family: Arial, sans-serif; color: #3e2f00;
+      background: linear-gradient(135deg, #fff176, #ffca28);
+    }
+    .app {
+      max-width: 500px; margin: 0 auto; padding: 25px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    h1 { text-align: center; margin-top: 0; }
+    .add { display: flex; gap: 8px; }
+    .add input {
+      flex: 1; padding: 12px; font-size: 1rem;
+      border: 2px solid #f9a825; border-radius: 10px;
+    }
+    button {
+      padding: 12px 18px; border: none; border-radius: 10px;
+      background: #f9a825; color: #fff; font-weight: bold;
+      font-size: 1rem; cursor: pointer;
+    }
+    button:hover { background: #f57f17; }
+    ul { list-style: none; padding: 0; margin: 20px 0 0; }
+    li {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px; margin-bottom: 8px;
+      background: #fff; border-radius: 10px;
+      animation: pop 0.3s ease;
+    }
+    @keyframes pop { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    li span { flex: 1; cursor: pointer; }
+    li.done span { text-decoration: line-through; color: #999; }
+    li button { padding: 6px 10px; background: #e53935; }
+    .info { text-align: center; margin-top: 15px; font-size: 0.9rem; }
+    .back { display: block; text-align: center; margin-top: 20px; color: #b26a00; font-weight: bold; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>✅ My To-Do List</h1>
+    <div class="add">
+      <input id="taskInput" type="text" placeholder="Add a new task...">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="list"></ul>
+    <div class="info" id="count"></div>
+    <a class="back" href="index.html">← Back to my portfolio</a>
+  </div>
+
+  <script>
+    let tasks = [];
+    try { tasks = JSON.parse(localStorage.getItem("tasks")) || []; } catch (e) { tasks = []; }
+
+    const input = document.getElementById("taskInput");
+    const list = document.getElementById("list");
+    const count = document.getElementById("count");
+
+    function save() { localStorage.setItem("tasks", JSON.stringify(tasks)); }
+
+    function render() {
+      list.innerHTML = "";
+      tasks.forEach((task, i) => {
+        const li = document.createElement("li");
+        if (task.done) li.classList.add("done");
+
+        const span = document.createElement("span");
+        span.textContent = task.text;
+        span.onclick = () => { tasks[i].done = !tasks[i].done; save(); render(); };
+
+        const del = document.createElement("button");
+        del.textContent = "✕";
+        del.onclick = () => { tasks.splice(i, 1); save(); render(); };
+
+        li.append(span, del);
+        list.appendChild(li);
+      });
+      const left = tasks.filter(t => !t.done).length;
+      count.textContent = tasks.length ? left + " task(s) left" : "No tasks yet. Add your first one! 🌟";
+    }
+
+    function addTask() {
+      const text = input.value.trim();
+      if (!text) return;
+      tasks.push({ text: text, done: false });
+      input.value = "";
+      save(); render();
+    }
+
+    input.addEventListener("keydown", e => { if (e.key === "Enter") addTask(); });
+    render();
+  </script>
+</body>
+</html>
