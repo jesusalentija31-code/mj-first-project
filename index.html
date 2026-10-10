@@ -10,32 +10,37 @@
       margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
-      color: #fff;
+      color: #3e2f00;
       text-align: center;
-      background: linear-gradient(-45deg, #1e3c72, #2a5298, #2e7d32, #00897b);
+      background: linear-gradient(-45deg, #fff176, #ffd54f, #ffca28, #ffe082);
       background-size: 400% 400%;
       animation: gradientMove 12s ease infinite;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 30px 20px;
     }
     @keyframes gradientMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    .container { max-width: 650px; }
-    h1 {
-      font-size: 2.8rem;
-      margin: 0 0 10px;
-      animation: slideDown 1s ease;
+    .container { max-width: 650px; width: 100%; }
+    .photo {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      animation: pop 1s ease;
     }
-    .typing {
-      font-size: 1.5rem;
-      min-height: 2rem;
-      color: #ffeb3b;
+    @keyframes pop {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
     }
+    h1 { font-size: 2.6rem; margin: 15px 0 10px; animation: slideDown 1s ease; }
+    .typing { font-size: 1.5rem; min-height: 2rem; color: #b26a00; font-weight: bold; }
     .cursor { animation: blink 0.8s infinite; }
     @keyframes blink { 50% { opacity: 0; } }
     @keyframes slideDown {
@@ -47,18 +52,31 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .card {
-      margin-top: 30px;
+      margin-top: 25px;
       padding: 25px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.65);
       border-radius: 16px;
-      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       opacity: 0;
       animation: fadeUp 1s ease forwards;
     }
     .card:nth-of-type(1) { animation-delay: 1s; }
     .card:nth-of-type(2) { animation-delay: 2s; }
+    .card:nth-of-type(3) { animation-delay: 3s; }
     .card h2 { margin-top: 0; }
     .card p { line-height: 1.6; margin: 0; }
+    .links a {
+      display: inline-block;
+      margin: 8px;
+      padding: 10px 20px;
+      background: #f9a825;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+    .links a:hover { transform: scale(1.1); }
     .float { display: inline-block; animation: float 3s ease-in-out infinite; }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
@@ -68,6 +86,7 @@
 </head>
 <body>
   <div class="container">
+    <img class="photo" src="photo.jpg" alt="Photo of MJ">
     <h1>Hello, I'm MJ <span class="float">👋</span></h1>
     <div class="typing"><span id="text"></span><span class="cursor">|</span></div>
 
@@ -79,6 +98,14 @@
     <div class="card">
       <h2>My Goal 🎯</h2>
       <p>My goal is to learn the basics of coding, build my own projects, and share my progress here.</p>
+    </div>
+
+    <div class="card">
+      <h2>Contact Me 💛</h2>
+      <div class="links">
+        <a href="mailto:jesusalentija31@gmail.com">Email</a>
+        <a href="https://www.instagram.com/ma.jesusa.31" target="_blank">Instagram</a>
+      </div>
     </div>
   </div>
 
