@@ -3,131 +3,268 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MJ | Portfolio</title>
+  <title>MJ | Aspiring Developer</title>
   <style>
+    :root {
+      --main: #f9a825;
+      --dark-main: #b26a00;
+      --light: #fffbea;
+      --soft: #fff3c4;
+      --dark: #2b2100;
+    }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      color: #3e2f00;
-      background: linear-gradient(-45deg, #fff176, #ffd54f, #ffca28, #ffe082);
-      background-size: 400% 400%;
-      animation: gradientMove 12s ease infinite;
+      background: var(--light);
+      color: var(--dark);
     }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+
+    /* NAVBAR */
     nav {
-      position: sticky; top: 0; z-index: 10;
-      background: rgba(255,255,255,0.8);
-      padding: 12px; text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky; top: 0; z-index: 20;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 6%;
+      background: var(--soft);
+      border-bottom: 2px solid var(--dark);
     }
-    nav a {
-      margin: 0 12px; color: #b26a00;
-      text-decoration: none; font-weight: bold;
+    .logo { font-weight: bold; font-size: 1.3rem; }
+    .menu { display: flex; align-items: center; gap: 22px; }
+    .menu a { color: var(--dark); text-decoration: none; font-size: 0.95rem; }
+    .menu a:hover { color: var(--dark-main); }
+    .contact-btn {
+      padding: 8px 16px; background: var(--main); color: var(--dark);
+      border: 2px solid var(--dark); border-radius: 6px;
+      font-weight: bold; cursor: pointer; font-size: 0.95rem;
     }
-    nav a:hover { text-decoration: underline; }
-    section { max-width: 700px; margin: 0 auto; padding: 50px 20px; text-align: center; }
-    .photo {
-      width: 170px; height: 170px; border-radius: 50%;
-      object-fit: cover; border: 6px solid #fff;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    .contact-btn:hover { background: var(--dark); color: var(--soft); }
+
+    /* HERO */
+    .hero {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 40px; flex-wrap: wrap;
+      padding: 80px 8%; min-height: 80vh;
     }
-    h1 { font-size: 2.6rem; margin: 15px 0 10px; }
-    h2 { margin-top: 0; }
-    .typing { font-size: 1.5rem; min-height: 2rem; color: #b26a00; font-weight: bold; }
+    .hero-text { flex: 1; min-width: 280px; }
+    .hero-text h1 { font-size: 2.6rem; margin: 0 0 10px; }
+    .typing { font-size: 1.5rem; font-weight: bold; color: var(--dark-main); min-height: 2rem; }
     .cursor { animation: blink 0.8s infinite; }
     @keyframes blink { 50% { opacity: 0; } }
+    .tagline { font-style: italic; margin: 15px 0; }
+    .work-link { color: var(--dark-main); font-weight: bold; text-decoration: none; }
+    .work-link:hover { text-decoration: underline; }
+    .hero-photo { flex: 1; min-width: 260px; display: flex; justify-content: center; }
+    .photo-frame {
+      position: relative; width: 280px; height: 340px;
+      background: var(--dark); border-radius: 10px;
+      animation: float 4s ease-in-out infinite;
+    }
+    .photo-frame img {
+      position: absolute; top: -12px; left: -12px;
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 10px; border: 3px solid var(--dark);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* SECTIONS */
+    section.block { padding: 70px 8%; text-align: center; }
+    section.alt { background: var(--soft); }
+    section h2 { font-size: 2rem; margin: 0 0 10px; }
+    .sub { max-width: 650px; margin: 0 auto 35px; line-height: 1.6; }
+    .grid { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
     .card {
-      padding: 25px; margin-top: 20px;
-      background: rgba(255,255,255,0.65);
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      flex: 1; min-width: 220px; max-width: 300px;
+      padding: 25px; background: #fff;
+      border: 2px solid var(--dark); border-radius: 12px;
+      box-shadow: 5px 5px 0 var(--dark);
+      transition: transform 0.2s;
     }
-    .card p { line-height: 1.6; margin: 0; }
+    .card:hover { transform: translateY(-6px); }
+    .card .icon { font-size: 2.2rem; }
+    .card h3 { margin: 10px 0; font-size: 1.1rem; }
+    .card p { font-size: 0.9rem; line-height: 1.5; margin: 0 0 12px; }
     .tag {
-      display: inline-block; margin: 6px; padding: 8px 16px;
-      background: #f9a825; color: #fff;
-      border-radius: 20px; font-weight: bold;
+      display: inline-block; margin: 3px; padding: 4px 10px;
+      background: var(--soft); border-radius: 12px; font-size: 0.8rem;
     }
-    .btn {
-      display: inline-block; margin: 8px; padding: 10px 20px;
-      background: #f9a825; color: #fff; text-decoration: none;
-      border-radius: 25px; font-weight: bold; transition: transform 0.2s;
+    .view-btn {
+      display: inline-block; margin-top: 8px; padding: 8px 16px;
+      background: var(--main); color: var(--dark); text-decoration: none;
+      border: 2px solid var(--dark); border-radius: 6px; font-weight: bold; font-size: 0.9rem;
     }
-    .btn:hover { transform: scale(1.1); }
+    .view-btn:hover { background: var(--dark); color: var(--soft); }
+
+    /* SLIDE-OUT CONTACT PANEL */
+    .panel {
+      position: fixed; top: 0; right: 0; z-index: 30;
+      width: 300px; max-width: 90%; height: 100%;
+      background: #fff; padding: 30px 25px;
+      border-left: 2px solid var(--dark);
+      box-shadow: -6px 0 20px rgba(0,0,0,0.2);
+      transform: translateX(110%); transition: transform 0.4s ease;
+    }
+    .panel.open { transform: translateX(0); }
+    .panel h3 { margin-top: 0; }
+    .panel a { color: var(--dark-main); font-weight: bold; text-decoration: none; word-break: break-all; }
+    .panel .row { margin: 18px 0; }
+    .close { position: absolute; top: 12px; right: 16px; font-size: 1.5rem; cursor: pointer; background: none; border: none; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark); color: var(--soft);
+      padding: 40px 8% 20px;
+    }
+    .footer-grid { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+    .footer-grid > div { flex: 1; min-width: 200px; }
+    footer h4 { color: var(--main); margin: 0 0 10px; }
+    footer p { font-size: 0.9rem; line-height: 1.5; margin: 0; }
+    footer a { display: block; color: var(--soft); text-decoration: none; margin-bottom: 6px; font-size: 0.9rem; }
+    footer a:hover { color: var(--main); }
+    .copy { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.7; }
+
+    /* SCROLL ANIMATION */
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
     .reveal.show { opacity: 1; transform: translateY(0); }
-    footer { text-align: center; padding: 20px; font-size: 0.9rem; }
+
+    @media (max-width: 650px) {
+      .menu a { display: none; }
+      .hero { padding: 50px 6%; text-align: center; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- NAVBAR -->
   <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <div class="logo">&lt;MJ/&gt;</div>
+    <div class="menu">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <button class="contact-btn" onclick="togglePanel()">Contact Me</button>
+    </div>
   </nav>
 
-  <section id="home">
-    <img class="photo" src="photo.jpg" alt="Photo of MJ">
-    <h1>Hello, I'm MJ 👋</h1>
-    <div class="typing"><span id="text"></span><span class="cursor">|</span></div>
-  </section>
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="hero-text">
+      <h1>Hi, I'm MJ 👋</h1>
+      <div class="typing"><span id="text"></span><span class="cursor">|</span></div>
+      <p class="tagline">Learning to code, one step at a time.</p>
+      <a class="work-link" href="#projects">View my work →</a>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <img src="photo.jpg" alt="Photo of MJ">
+      </div>
+    </div>
+  </header>
 
-  <section id="about" class="reveal">
-    <div class="card">
-      <h2>About Me</h2>
-      <p>I'm new to coding and GitHub. This is my portfolio, where I share what I'm learning and the projects I build along the way.</p>
-    </div>
-    <div class="card">
-      <h2>My Goal 🎯</h2>
-      <p>My goal is to learn the basics of coding, build my own projects, and share my progress here.</p>
-    </div>
-  </section>
-
-  <section id="skills" class="reveal">
-    <div class="card">
-      <h2>Skills I'm Learning</h2>
-      <span class="tag">HTML</span>
-      <span class="tag">CSS</span>
-      <span class="tag">JavaScript</span>
-      <span class="tag">GitHub</span>
-    </div>
-  </section>
-
-  <section id="projects" class="reveal">
-    <div class="card">
-      <h2>My Projects</h2>
-      <p><strong>✅ To-Do List App</strong><br>My first interactive project. Add, finish, and delete tasks.</p>
-      <a class="btn" href="todo.html">Open To-Do App</a>
-    </div>
-    <div class="card">
-      <p><strong>🌐 This Portfolio Website</strong><br>Built with HTML, CSS, and JavaScript and hosted on GitHub Pages.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="reveal">
-    <div class="card">
-      <h2>Contact Me 💛</h2>
-      <a class="btn" href="mailto:jesusalentija31@gmail.com">Email</a>
-      <a class="btn" href="https://www.instagram.com/ma.jesusa.31" target="_blank">Instagram</a>
+  <!-- ABOUT -->
+  <section class="block alt reveal" id="about">
+    <h2>About Me</h2>
+    <p class="sub">I'm a beginner who is excited about coding. I enjoy turning ideas into real web pages, and my goal is to learn the basics, build my own projects, and share my progress here.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">💻</div>
+        <h3>Clean Code</h3>
+        <p>Learning to write simple, well-organized HTML, CSS, and JavaScript.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Colorful Design</h3>
+        <p>Creating pages that look friendly and bright, with yellow as my favorite color.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Always Learning</h3>
+        <p>Practicing every day and building small projects to improve.</p>
+      </div>
     </div>
   </section>
 
-  <footer>Made with 💛 by MJ</footer>
+  <!-- SKILLS -->
+  <section class="block reveal" id="skills">
+    <h2>Skills I'm Learning</h2>
+    <p class="sub">These are the tools I'm practicing right now.</p>
+    <div class="grid">
+      <div class="card"><div class="icon">🌐</div><h3>HTML</h3><p>Structure of web pages.</p></div>
+      <div class="card"><div class="icon">🖌️</div><h3>CSS</h3><p>Colors, layouts, and animations.</p></div>
+      <div class="card"><div class="icon">🧠</div><h3>JavaScript</h3><p>Making pages interactive.</p></div>
+      <div class="card"><div class="icon">🐙</div><h3>GitHub</h3><p>Saving and sharing my code.</p></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="block alt reveal" id="projects">
+    <h2>My Projects</h2>
+    <p class="sub">Here are some of the projects I've built while learning.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">✅</div>
+        <h3>To-Do List App</h3>
+        <p>Add, finish, and delete tasks. My first interactive project.</p>
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><br>
+        <a class="view-btn" href="todo.html">View Project</a>
+      </div>
+      <div class="card">
+        <div class="icon">🌟</div>
+        <h3>This Portfolio</h3>
+        <p>My personal website, hosted for free on GitHub Pages.</p>
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><br>
+        <a class="view-btn" href="#home">Back to top</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT PANEL -->
+  <aside class="panel" id="panel">
+    <button class="close" onclick="togglePanel()">×</button>
+    <h3>Get in Touch</h3>
+    <div class="row">📧 <a href="mailto:jesusalentija31@gmail.com">jesusalentija31@gmail.com</a></div>
+    <div class="row">📸 <a href="https://www.instagram.com/ma.jesusa.31" target="_blank">@ma.jesusa.31</a></div>
+    <div class="row">🐙 <a href="https://github.com/jesusalentija31-code" target="_blank">GitHub</a></div>
+  </aside>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h4>MJ</h4>
+        <p>Beginner developer who loves learning, building, and sharing.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="https://www.instagram.com/ma.jesusa.31" target="_blank">Instagram</a>
+        <a href="https://github.com/jesusalentija31-code" target="_blank">GitHub</a>
+        <a href="mailto:jesusalentija31@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="copy">Made with 💛 by MJ</div>
+  </footer>
 
   <script>
+    // Slide-out contact panel
+    function togglePanel() {
+      document.getElementById("panel").classList.toggle("open");
+    }
+
+    // Typing animation (change these phrases to your own!)
     const phrases = [
-      "I'm a beginner coder.",
-      "I'm learning GitHub.",
-      "I'm building my portfolio.",
-      "I never stop learning!"
+      "Aspiring Web Developer",
+      "Beginner Coder",
+      "GitHub Learner",
+      "Always Learning!"
     ];
     let p = 0, c = 0, deleting = false;
     const el = document.getElementById("text");
@@ -142,6 +279,7 @@
     }
     type();
 
+    // Fade-in on scroll
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("show"); });
     }, { threshold: 0.15 });
