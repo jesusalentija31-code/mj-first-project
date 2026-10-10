@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hi, I'm MJ</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(-45deg, #1e3c72, #2a5298, #2e7d32, #00897b);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container { max-width: 650px; }
+    h1 {
+      font-size: 2.8rem;
+      margin: 0 0 10px;
+      animation: slideDown 1s ease;
+    }
+    .typing {
+      font-size: 1.5rem;
+      min-height: 2rem;
+      color: #ffeb3b;
+    }
+    .cursor { animation: blink 0.8s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card {
+      margin-top: 30px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+    }
+    .card:nth-of-type(1) { animation-delay: 1s; }
+    .card:nth-of-type(2) { animation-delay: 2s; }
+    .card h2 { margin-top: 0; }
+    .card p { line-height: 1.6; margin: 0; }
+    .float { display: inline-block; animation: float 3s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hello, I'm MJ <span class="float">👋</span></h1>
+    <div class="typing"><span id="text"></span><span class="cursor">|</span></div>
+
+    <div class="card">
+      <h2>About Me</h2>
+      <p>I'm new to coding and GitHub. This is my very first web page, and I'm excited to learn something new every day.</p>
+    </div>
+
+    <div class="card">
+      <h2>My Goal 🎯</h2>
+      <p>My goal is to learn the basics of coding, build my own projects, and share my progress here.</p>
+    </div>
+  </div>
+
+  <script>
+    const phrases = [
+      "I'm a beginner coder.",
+      "I'm learning GitHub.",
+      "I'm building my first website.",
+      "I never stop learning!"
+    ];
+    let p = 0, c = 0, deleting = false;
+    const el = document.getElementById("text");
+
+    function type() {
+      const current = phrases[p];
+      el.textContent = deleting ? current.slice(0, c--) : current.slice(0, c++);
+
+      let speed = deleting ? 40 : 90;
+      if (!deleting && c > current.length) { deleting = true; speed = 1500; }
+      else if (deleting && c < 0) { deleting = false; p = (p + 1) % phrases.length; c = 0; speed = 400; }
+      setTimeout(type, speed);
+    }
+    type();
+  </script>
+</body>
+</html>
